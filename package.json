@@ -1,0 +1,21 @@
+{
+  "name": "nexura-labs",
+  "version": "1.0.0",
+  "description": "NEXURA LABS — Futuristic Digital Agency & Client Demo Platform",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx -y serve .",
+    "start": "npx -y serve -l 8088 .",
+    "serve": "python -m http.server 8088"
+  },
+  "keywords": [
+    "nexura-labs",
+    "digital-agency",
+    "web-development",
+    "high-conversion",
+    "futuristic",
+    "client-demos"
+  ],
+  "author": "Afiq Amri — NEXURA LABS",
+  "license": "MIT"
+}
