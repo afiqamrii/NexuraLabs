@@ -1,635 +1,148 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NEXURA LABS — High-Conversion Digital Systems & Prototype Lab</title>
-  <meta name="description" content="NEXURA LABS architects high-converting websites and digital booking systems for local businesses across Malaysia. Experience your personalized live prototype before committing.">
-  <meta name="keywords" content="NEXURA LABS, Web Development Malaysia, High Conversion Website, Business Website Cheras, Kuala Lumpur Web Developer, WhatsApp Booking System">
-
-  <!-- OpenGraph -->
-  <meta property="og:title" content="NEXURA LABS — High-Conversion Digital Systems">
-  <meta property="og:description" content="We don't sell generic websites. We deploy high-conversion digital engines for local businesses. Experience your 24h prototype first.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07090d">
+  <meta name="color-scheme" content="dark">
+  <meta name="robots" content="index, follow">
+  <title>NEXURA LABS — Professional Websites for Local Businesses in Malaysia</title>
+  <meta name="description" content="NEXURA LABS builds clear, modern websites for Malaysian local businesses, with WhatsApp enquiries, booking, payment integration and ongoing website care.">
+  <meta name="keywords" content="web developer Malaysia, freelance web developer Malaysia, website design for small businesses, business website Malaysia">
+  <link rel="canonical" href="https://afiqamrii.github.io/Maymorii_Studio_Web/">
+  <meta property="og:title" content="NEXURA LABS — Professional Websites for Local Businesses">
+  <meta property="og:description" content="Modern, responsive websites designed to help customers discover, understand and contact your business.">
   <meta property="og:type" content="website">
-
-  <!-- Google Fonts: Space Grotesk, JetBrains Mono, Plus Jakarta Sans -->
+  <meta property="og:url" content="https://afiqamrii.github.io/Maymorii_Studio_Web/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Futuristic Cyber-Luxe Stylesheet -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/futuristic.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "NEXURA LABS",
+    "url": "https://afiqamrii.github.io/Maymorii_Studio_Web/",
+    "founder": { "@type": "Person", "name": "Afiq Amri" },
+    "areaServed": { "@type": "Country", "name": "Malaysia" },
+    "description": "Professional websites for local Malaysian businesses.",
+    "knowsAbout": ["Business websites", "Web design", "WhatsApp enquiry integration", "Booking systems", "Payment integration", "Website maintenance"]
+  }
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
 
-  <!-- Interactive Cyber Canvas -->
-  <canvas id="cyber-canvas"></canvas>
-  <div class="scanline-overlay"></div>
-
-  <!-- High-Tech Top System Ticker -->
-  <div class="system-ticker-bar">
-    <div class="ticker-left">
-      <div class="system-status">
-        <span class="status-pulse"></span>
-        <span>SYSTEM ONLINE // NEXURA ENGINE v2.6</span>
-      </div>
-      <span>LOCATION: KUALA LUMPUR &amp; SELANGOR</span>
-    </div>
-    <div class="ticker-right">
-      <span>SPRINT STATUS: <strong>ACCEPTING 2 CLIENTS</strong></span>
-      <span class="ticker-tag">LATENCY: 14MS</span>
-    </div>
-  </div>
-
-  <!-- Header -->
-  <header class="site-header">
-    <div class="container">
-      <div class="nav-inner">
-        <a href="#hero" class="brand-brand">
-          <div class="brand-icon"></div>
-          <div class="brand-title-wrap">
-            <span class="brand-name">NEXURA<span>LABS</span></span>
-            <span class="brand-subtitle">DIGITAL SYSTEMS</span>
-          </div>
-        </a>
-
-        <nav aria-label="Main Navigation">
-          <ul class="nav-menu">
-            <li class="nav-item"><a href="#demos">Demo Hub</a></li>
-            <li class="nav-item"><a href="#protocol">The Protocol</a></li>
-            <li class="nav-item"><a href="#capabilities">Capabilities</a></li>
-            <li class="nav-item"><a href="#estimator">Estimator</a></li>
-            <li class="nav-item"><a href="#pricing">Tiers</a></li>
-          </ul>
-        </nav>
-
-        <div class="header-cta-group">
-          <a href="#demos" class="btn btn-cyber-outline" style="font-size: 0.8rem; padding: 0.55rem 1.1rem;">
-            <span>// Live Demos</span>
-          </a>
-          <a href="#estimator" class="btn btn-cyan" style="font-size: 0.8rem; padding: 0.55rem 1.1rem;">
-            <span>Request Prototype</span>
-          </a>
-        </div>
-      </div>
+  <header class="site-header" data-header>
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="NEXURA LABS home"><span class="brand-mark" aria-hidden="true"><span></span></span><span>NEXURA <b>LABS</b></span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="sr-only">Open navigation</span><span></span><span></span></button>
+      <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+        <a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="#contact" class="nav-cta">Get a Website</a>
+      </nav>
     </div>
   </header>
 
-  <main>
-    <!-- ======================================================================
-         HERO SECTION
-         ====================================================================== -->
-    <section id="hero" class="hero-section">
-      <div class="container">
-        <div class="hero-grid">
-          <div>
-            <div class="hero-badge-pill">
-              <span style="color: var(--matrix-green);">●</span>
-              <span>THE DEMO-FIRST WEB AGENCY</span>
-            </div>
+  <main id="main-content">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span></span> Web developer for Malaysian businesses</p>
+          <h1>Professional websites for <em>local businesses.</em></h1>
+          <p class="hero-lead">Modern, responsive websites designed to help customers discover, understand and contact your business.</p>
+          <div class="hero-actions"><a class="button button-primary" href="#contact">Get a Website <span aria-hidden="true">↗</span></a><a class="button button-secondary" href="#work">View My Work <span aria-hidden="true">↓</span></a></div>
+          <ul class="proof-row" aria-label="NEXURA LABS service principles"><li><strong>Built around you</strong><span>Not a recycled template</span></li><li><strong>Mobile-friendly</strong><span>Clear on every screen</span></li><li><strong>Simple process</strong><span>From concept to launch</span></li></ul>
+        </div>
 
-            <h1 class="hero-title">
-              We Don't Just Build Websites.<br>
-              We Engineer <span class="gradient-text">Conversion Engines.</span>
-            </h1>
-
-            <p class="hero-subtitle">
-              Stop paying upfront for vague promises. At <strong>NEXURA LABS</strong>, we build and host an interactive, personalized website prototype tailored to your business before you sign a contract.
-            </p>
-
-            <div class="hero-cta-wrap">
-              <a href="#demos" class="btn btn-cyan">
-                <span>Explore Live Prototypes</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-              </a>
-
-              <a href="#estimator" class="btn btn-cyber-outline">
-                <span>Scope Your Project</span>
-              </a>
-            </div>
-
-            <!-- Trust Metrics -->
-            <div class="hero-metrics-bar">
-              <div class="metric-item">
-                <div class="val">24–48<span>h</span></div>
-                <div class="lbl">Rapid Demo Deployment</div>
-              </div>
-              <div class="metric-item">
-                <div class="val">100<span>%</span></div>
-                <div class="lbl">Pre-Commitment Clarity</div>
-              </div>
-              <div class="metric-item">
-                <div class="val">5.0<span>★</span></div>
-                <div class="lbl">Google Social Proof Sync</div>
-              </div>
-            </div>
+        <div class="hero-visual reveal" aria-label="NEXURA LABS website planning interface">
+          <div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div>
+          <div class="dashboard-card">
+            <div class="dashboard-topbar"><div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div><span>LOCAL BUSINESS / WEBSITE</span><span class="live-dot">READY</span></div>
+            <div class="dashboard-content"><p class="mono-label">A CLEAR CUSTOMER JOURNEY</p><h2>Be discovered.<br>Build trust.<br>Make contact easy.</h2><div class="signal-map" aria-hidden="true"><div class="signal-node is-active"><span>01</span><b>Find</b></div><div class="signal-line"></div><div class="signal-node"><span>02</span><b>Understand</b></div><div class="signal-line"></div><div class="signal-node"><span>03</span><b>Contact</b></div></div><div class="dashboard-metrics"><div><span>Designed for</span><strong>Local businesses</strong></div><div><span>Built to support</span><strong>Real enquiries</strong></div></div></div>
           </div>
-
-          <!-- Cyber Diagnostic Terminal Visual -->
-          <div>
-            <div class="cyber-terminal-card">
-              <div class="terminal-header">
-                <div class="terminal-dots">
-                  <div class="t-dot t-red"></div>
-                  <div class="t-dot t-yellow"></div>
-                  <div class="t-dot t-green"></div>
-                </div>
-                <span class="terminal-title">nexura-terminal-v2.6.sh</span>
-                <span style="color: var(--matrix-green); font-size: 0.7rem;">● LIVE</span>
-              </div>
-
-              <div class="terminal-body">
-                <div class="terminal-line">
-                  <span class="t-prompt">$</span>
-                  <span class="t-highlight">nexura deploy --target="local_business"</span>
-                </div>
-                <div class="terminal-line">
-                  <span class="t-violet">[INFO]</span>
-                  <span id="terminal-stream">INITIALIZING SYSTEM TELEMETRY...</span>
-                </div>
-                <div class="terminal-line">
-                  <span class="t-prompt">></span>
-                  <span>Active Client Demo: <strong>Maymorii Studio</strong> (Cheras, KL)</span>
-                </div>
-                <div class="terminal-line">
-                  <span class="t-prompt">></span>
-                  <span>Features: WhatsApp Booking • 5.0 Google Reviews • Lightbox</span>
-                </div>
-
-                <div class="terminal-active-box">
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                    <span style="color: var(--neon-cyan); font-weight: 700; font-size: 0.75rem;">HOSTED DEMO ENDPOINT:</span>
-                    <span style="color: var(--matrix-green); font-size: 0.7rem;">STATUS: READY</span>
-                  </div>
-                  <code style="color: #FFFFFF; font-size: 0.8rem; word-break: break-all;">/demo/maymorii/</code>
-                  <div style="margin-top: 0.75rem;">
-                    <a href="demo/maymorii/" target="_blank" rel="noopener noreferrer" class="btn btn-cyan" style="width: 100%; padding: 0.5rem; font-size: 0.75rem;">
-                      <span>Launch Maymorii Studio Demo →</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div class="floating-note note-one"><span>01</span> Clear services</div><div class="floating-note note-two"><span>02</span> WhatsApp-ready</div>
         </div>
       </div>
     </section>
 
-    <!-- ======================================================================
-         LIVE DEMO HUB (SHOWCASING OUR ACTUAL PROTOTYPES)
-         ====================================================================== -->
-    <section id="demos" class="demos-section">
-      <div class="container">
-        <div class="demos-header">
-          <span class="section-tag">Interactive Proof</span>
-          <h2 class="section-title">The Client Demo Hub</h2>
-          <p class="section-desc">
-            We don't showcase static mockups or fabricated screenshots. Every prospect gets a fully functional, interactive sales prototype hosted in our central lab.
-          </p>
-        </div>
+    <section class="trust-strip" aria-label="Businesses NEXURA LABS serves"><div class="container trust-inner"><span>Salons & barbers</span><i></i><span>Cafes & restaurants</span><i></i><span>Workshops & contractors</span><i></i><span>Studios & local services</span></div></section>
 
-        <div class="demos-grid">
-          <!-- Featured Live Demo: Maymorii Studio -->
-          <article class="demo-card featured">
-            <div class="demo-media-wrap">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" 
-                   alt="Maymorii Studio Photography Demo Preview" loading="lazy">
-              <div class="demo-badge-status">
-                <span class="dot"></span>
-                <span>ONLINE // LIVE DEMO</span>
-              </div>
-            </div>
-
-            <div class="demo-body">
-              <span class="demo-industry-tag">Photography Studio // Cheras, KL</span>
-              <h3>Maymorii Studio</h3>
-              <p>
-                An editorial luxury website designed for an intimate portrait studio. Features their verified 5.0★ Google Rating, interactive review submission, and direct WhatsApp session booking.
-              </p>
-
-              <ul class="demo-features-list">
-                <li>
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>WhatsApp Booking Session Inquiry Builder</span>
-                </li>
-                <li>
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>⭐ 5.0 Google Rating (94 Reviews) Integration</span>
-                </li>
-                <li>
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Interactive Customer Review Form with Live Appending</span>
-                </li>
-                <li>
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Filterable Portfolio with Modal Lightbox</span>
-                </li>
-              </ul>
-
-              <div class="demo-footer">
-                <span class="demo-url-preview">/demo/maymorii/</span>
-                <a href="demo/maymorii/" target="_blank" rel="noopener noreferrer" class="btn btn-cyan" style="padding: 0.55rem 1.15rem; font-size: 0.8rem;">
-                  <span>Launch Live Demo ↗</span>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- In-Lab Concept 1: Barber Lounge -->
-          <article class="demo-card in-lab">
-            <div class="demo-media-wrap">
-              <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80" 
-                   alt="Barber Studio Prototype" loading="lazy">
-              <div class="demo-badge-status" style="border-color: var(--electric-violet); color: var(--electric-violet);">
-                <span class="dot" style="background: var(--electric-violet); box-shadow: 0 0 8px var(--electric-violet);"></span>
-                <span>IN LAB // PROTOTYPE READY</span>
-              </div>
-            </div>
-
-            <div class="demo-body">
-              <span class="demo-industry-tag" style="color: var(--electric-violet);">Grooming &amp; Barbershop</span>
-              <h3>Apex Barber Lounge</h3>
-              <p>
-                Bold, masculine aesthetic built for modern male grooming. Features barber chair availability calendar, service tier selector, and walk-in waitlist tracker.
-              </p>
-
-              <ul class="demo-features-list">
-                <li>
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Barber Slot &amp; Service Selection Matrix</span>
-                </li>
-                <li>
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Price List &amp; Haircut Styling Gallery</span>
-                </li>
-              </ul>
-
-              <div class="demo-footer">
-                <span class="demo-url-preview">/demo/apex-barber/</span>
-                <a href="#estimator" class="btn btn-cyber-outline" style="padding: 0.55rem 1.15rem; font-size: 0.8rem;">
-                  <span>Request Custom Demo</span>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- In-Lab Concept 2: Artisan Cafe -->
-          <article class="demo-card in-lab">
-            <div class="demo-media-wrap">
-              <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80" 
-                   alt="Cafe and dining prototype" loading="lazy">
-              <div class="demo-badge-status" style="border-color: var(--electric-violet); color: var(--electric-violet);">
-                <span class="dot" style="background: var(--electric-violet); box-shadow: 0 0 8px var(--electric-violet);"></span>
-                <span>IN LAB // PROTOTYPE READY</span>
-              </div>
-            </div>
-
-            <div class="demo-body">
-              <span class="demo-industry-tag" style="color: var(--electric-violet);">F&amp;B // Specialty Dining</span>
-              <h3>Kuro Kopi Atelier</h3>
-              <p>
-                Minimalist specialty coffee and brunch landing experience with high-speed digital menu, table reservation WhatsApp trigger, and Google Maps directions.
-              </p>
-
-              <ul class="demo-features-list">
-                <li>
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Mobile QR &amp; Filterable Food Menu</span>
-                </li>
-                <li>
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Waze &amp; Google Maps Studio Integration</span>
-                </li>
-              </ul>
-
-              <div class="demo-footer">
-                <span class="demo-url-preview">/demo/kuro-kopi/</span>
-                <a href="#estimator" class="btn btn-cyber-outline" style="padding: 0.55rem 1.15rem; font-size: 0.8rem;">
-                  <span>Request Custom Demo</span>
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
+    <section class="section services-section" id="services"><div class="container">
+      <div class="section-heading reveal"><div><p class="eyebrow"><span></span> Services</p><h2>A practical online presence,<br>built around your business.</h2></div><p>Start with what customers need to know and the action you want them to take.</p></div>
+      <div class="service-grid">
+        <article class="service-card reveal"><span class="service-number">01</span><div class="service-icon" aria-hidden="true">⌁</div><h3>Business Websites</h3><p>A professional home for your services, location, work and contact information.</p><ul><li>Clear mobile-responsive pages</li><li>Google Maps and social links</li><li>Basic local SEO setup</li></ul></article>
+        <article class="service-card reveal"><span class="service-number">02</span><div class="service-icon" aria-hidden="true">◇</div><h3>Booking & Enquiry</h3><p>Make it easier for interested customers to ask questions, enquire or request a booking.</p><ul><li>WhatsApp enquiry flows</li><li>Contact and booking forms</li><li>Clear calls to action</li></ul></article>
+        <article class="service-card reveal"><span class="service-number">03</span><div class="service-icon" aria-hidden="true">↗</div><h3>Payment Integration</h3><p>Add payment functionality when the customer journey genuinely needs it.</p><ul><li>Scoped to your requirements</li><li>Third-party payment setup</li><li>Quoted before development</li></ul></article>
+        <article class="service-card reveal"><span class="service-number">04</span><div class="service-icon" aria-hidden="true">↻</div><h3>Website Maintenance</h3><p>Optional ongoing care to keep your website online, updated and supported.</p><ul><li>Hosting, SSL and backups</li><li>Minor content changes</li><li>Technical support</li></ul></article>
       </div>
-    </section>
+    </div></section>
 
-    <!-- ======================================================================
-         THE PROTOCOL (HOW IT WORKS)
-         ====================================================================== -->
-    <section id="protocol" class="protocol-section">
-      <div class="container">
-        <div style="text-align: center; max-width: 650px; margin: 0 auto;">
-          <span class="section-tag">The Nexura Protocol</span>
-          <h2 class="section-title">Zero Friction. Total Transparency.</h2>
-          <p class="section-desc">
-            How we eliminate client risk by deploying real sales prototypes before any contractual commitment.
-          </p>
-        </div>
+    <section class="section work-section" id="work"><div class="container">
+      <div class="section-heading reveal"><div><p class="eyebrow"><span></span> Demo-first approach</p><h2>See a direction before<br>committing to the full build.</h2></div><p>Concept websites are clearly labelled and tailored to the business. They are not presented as completed client work.</p></div>
+      <article class="case-study reveal">
+        <div class="case-preview"><div class="browser-frame"><div class="browser-bar"><i></i><i></i><i></i><span>nexuralabs / demo / maymorii</span></div><div class="preview-image" role="img" aria-label="Maymorii Studio photography website concept preview"><div class="preview-overlay"><span>Concept website · Photography studio</span><strong>Maymorii<br>Studio</strong><small>Temporary concept imagery · Not the official website</small></div></div></div></div>
+        <div class="case-copy"><p class="mono-label">LIVE DEMO PROJECT · 001</p><h3>Maymorii Studio</h3><p>A tailored photography-studio concept showing how customers could discover sessions, view visual work, check the location and prepare a WhatsApp enquiry.</p><div class="case-goals"><div><span>01</span><p><strong>Industry-specific design</strong>Editorial visual direction created for a photography studio.</p></div><div><span>02</span><p><strong>Clear enquiry path</strong>Visitors can prepare a useful WhatsApp message.</p></div><div><span>03</span><p><strong>Honest concept labelling</strong>Stock images and suggested content are disclosed.</p></div></div><div class="case-actions"><a class="button button-primary" href="demo/maymorii/">View Demo <span aria-hidden="true">↗</span></a><span class="concept-label">Independent concept · Not a claimed paying client</span></div></div>
+      </article>
+    </div></section>
 
-        <div class="protocol-grid">
-          <div class="protocol-step-card">
-            <div class="step-num">01</div>
-            <h3>Intelligent Reconnaissance</h3>
-            <p>We analyze your local presence, Google Maps reviews, competitors, and customer drop-off points to find untapped conversion opportunities.</p>
-          </div>
+    <section class="section process-section" id="process"><div class="container process-grid">
+      <div class="process-intro reveal"><p class="eyebrow"><span></span> How it works</p><h2>A simple process from idea to launch.</h2><p>The full production build begins after the scope is agreed and the deposit is paid.</p><a href="#contact" class="text-link">Tell me about your business <span aria-hidden="true">↗</span></a></div>
+      <ol class="process-list">
+        <li class="reveal"><span>01</span><div><h3>Tell me about your business</h3><p>Share your services, customers, goals and current online presence.</p></div></li>
+        <li class="reveal"><span>02</span><div><h3>Review your website concept</h3><p>See the proposed direction and discuss what should change for the real website.</p></div></li>
+        <li class="reveal"><span>03</span><div><h3>Confirm your package</h3><p>Agree on pages, functionality, timeline, price and responsibilities.</p></div></li>
+        <li class="reveal"><span>04</span><div><h3>Website development</h3><p>The full build starts after the 50% deposit and approved content are received.</p></div></li>
+        <li class="reveal"><span>05</span><div><h3>Review and launch</h3><p>Complete the included revisions, final checks and remaining payment.</p></div></li>
+        <li class="reveal"><span>06</span><div><h3>Optional ongoing support</h3><p>Choose website care if you want hosting, maintenance and minor updates handled.</p></div></li>
+      </ol>
+    </div></section>
 
-          <div class="protocol-step-card">
-            <div class="step-num">02</div>
-            <h3>24h Prototype Deployment</h3>
-            <p>We engineer a live, clickable prototype tailored to your brand and host it directly in our lab at <code>nexuralabs.com/demo/[your-business]</code>.</p>
-          </div>
-
-          <div class="protocol-step-card">
-            <div class="step-num">03</div>
-            <h3>Test Drive On Your Phone</h3>
-            <p>You review the prototype directly on your smartphone and desktop. Experience the smooth animations, reviews, and WhatsApp flows first-hand.</p>
-          </div>
-
-          <div class="protocol-step-card">
-            <div class="step-num">04</div>
-            <h3>Production Launch &amp; Scale</h3>
-            <p>Satisfied with the concept? 50% deposit activates production. We migrate the site to your custom domain and link your live business channels.</p>
-          </div>
-        </div>
+    <section class="section pricing-section" id="pricing"><div class="container">
+      <div class="section-heading reveal"><div><p class="eyebrow"><span></span> Introductory pricing</p><h2>Clear starting packages<br>for local businesses.</h2></div><p>Introductory pricing is available for selected local businesses while the NEXURA LABS portfolio expands.</p></div>
+      <div class="pricing-grid">
+        <article class="price-card reveal"><p class="mono-label">STARTER</p><h3>Professional essentials</h3><p class="price">RM 899</p><p>Best for businesses that need a simple professional online presence.</p><ul><li>1–3 pages</li><li>Responsive mobile-friendly design</li><li>WhatsApp button and contact details</li><li>Google Maps and social links</li><li>Basic SEO setup</li><li>1 revision</li><li>First-year hosting included</li></ul><button class="button button-secondary choose-package" type="button" data-package="Starter">Choose Starter</button></article>
+        <article class="price-card featured reveal"><div class="popular-tag">Recommended</div><p class="mono-label">BUSINESS</p><h3>Built for growth</h3><p class="price">RM 1,499</p><p>The main package for businesses that need more depth and a stronger customer journey.</p><ul><li>Up to 5–6 pages</li><li>More customised professional design</li><li>Services section and gallery</li><li>WhatsApp and contact integration</li><li>Google Maps and basic SEO</li><li>Basic analytics</li><li>Domain + hosting for first year</li><li>2 revisions</li><li>30 days post-launch support</li></ul><button class="button button-primary choose-package" type="button" data-package="Business">Choose Business</button></article>
+        <article class="price-card reveal"><p class="mono-label">BUSINESS+</p><h3>Advanced requirements</h3><p class="price"><span>from</span> RM 2,499</p><p>For websites requiring more advanced functionality or custom integrations.</p><ul><li>Booking systems</li><li>Payment integration</li><li>Product catalogue</li><li>Advanced forms or CMS</li><li>Additional pages</li><li>Custom integrations</li><li>Complex features scoped separately</li></ul><button class="button button-secondary choose-package" type="button" data-package="Business+">Discuss Business+</button></article>
       </div>
-    </section>
+      <p class="pricing-note reveal">Final pricing may vary depending on project requirements. Every scope and cost is confirmed before full production begins.</p>
+    </div></section>
 
-    <!-- ======================================================================
-         CAPABILITIES / WHAT WE DO
-         ====================================================================== -->
-    <section id="capabilities" class="services-matrix-section" style="padding: 6.5rem 0;">
-      <div class="container">
-        <div style="text-align: center; max-width: 650px; margin: 0 auto 3.5rem;">
-          <span class="section-tag">Engineering Capabilities</span>
-          <h2 class="section-title">Built for Real Business Growth</h2>
-          <p class="section-desc">
-            Every line of code is optimized for three metrics: Speed, Clarity, and Inquiries.
-          </p>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.75rem;">
-          <div style="background: var(--carbon-card); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-md); padding: 2rem;">
-            <div style="color: var(--neon-cyan); margin-bottom: 1rem;">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-            </div>
-            <h3 style="color: var(--text-white); font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.5rem;">Conversion-Engineered Sites</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Clean, modern responsive websites designed around your specific customer psychology without AI generic cliches.</p>
-          </div>
-
-          <div style="background: var(--carbon-card); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-md); padding: 2rem;">
-            <div style="color: var(--whatsapp-green); margin-bottom: 1rem;">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-            </div>
-            <h3 style="color: var(--text-white); font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.5rem;">WhatsApp Booking Automation</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Pre-fill service, time, and customer details directly into WhatsApp so you receive structured, ready-to-book leads.</p>
-          </div>
-
-          <div style="background: var(--carbon-card); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-md); padding: 2rem;">
-            <div style="color: #F59E0B; margin-bottom: 1rem;">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-            </div>
-            <h3 style="color: var(--text-white); font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.5rem;">Google Review Synchronization</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Showcase your 5.0 Google stars and customer quotes directly on page, with built-in feedback forms for review generation.</p>
-          </div>
-
-          <div style="background: var(--carbon-card); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-md); padding: 2rem;">
-            <div style="color: var(--matrix-green); margin-bottom: 1rem;">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-            </div>
-            <h3 style="color: var(--text-white); font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.5rem;">Sub-Second Page Performance</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">No bloated WordPress templates or 40-plugin security risks. Fast, clean modern HTML/CSS/JS that loads instantaneously.</p>
-          </div>
-        </div>
+    <section class="section care-section" id="care"><div class="container">
+      <div class="section-heading reveal"><div><p class="eyebrow"><span></span> After launch</p><h2>Optional website care,<br>without unlimited scope.</h2></div><p>Minor content changes mean small text or image replacements within the existing layout—not redesigns, new pages or new functionality.</p></div>
+      <div class="care-grid">
+        <article class="care-card reveal"><div><p class="mono-label">MONTHLY</p><h3>Website Care</h3><p class="care-price">RM 79 <span>/ month</span></p></div><ul><li>Hosting and SSL</li><li>Backups</li><li>Basic uptime monitoring</li><li>Basic technical maintenance</li><li>Minor content updates</li><li>Technical support</li></ul><button class="button button-secondary choose-package" type="button" data-package="Website Care">Ask about monthly care</button></article>
+        <article class="care-card reveal"><div><p class="mono-label">ANNUAL</p><h3>Annual Website Care</h3><p class="care-price">RM 399 <span>/ year</span></p></div><ul><li>Hosting</li><li>Domain renewal where applicable</li><li>SSL and backups</li><li>Basic technical maintenance</li><li>Larger changes quoted separately</li></ul><button class="button button-secondary choose-package" type="button" data-package="Annual Website Care">Ask about annual care</button></article>
       </div>
-    </section>
+      <div class="addons reveal"><div class="addons-heading"><p class="mono-label">OPTIONAL ADD-ONS</p><h3>Add only what your business needs.</h3></div><div class="addons-list"><div><span>Payment integration</span><strong>from RM 500</strong></div><div><span>Booking system</span><strong>from RM 500</strong></div><div><span>Additional page</span><strong>from RM 150</strong></div><div><span>Advanced form</span><strong>from RM 150</strong></div><div><span>Small content update</span><strong>RM 50–RM 100</strong></div><div><span>Larger customisation</span><strong>Custom quote</strong></div></div><p>Complex integrations are scoped before a final quotation. Third-party subscription or transaction fees are separate where applicable.</p></div>
+    </div></section>
 
-    <!-- ======================================================================
-         INTERACTIVE PROJECT ESTIMATOR & WHATSAPP GENERATOR
-         ====================================================================== -->
-    <section id="estimator" class="estimator-section">
-      <div class="container">
-        <div style="text-align: center; max-width: 650px; margin: 0 auto 3rem;">
-          <span class="section-tag">Interactive Project Scope</span>
-          <h2 class="section-title">Configure Your Digital Engine</h2>
-          <p class="section-desc">
-            Calculate your investment, sprint timeline, and request a personalized 24-hour prototype for your business.
-          </p>
-        </div>
+    <section class="payment-section"><div class="container payment-grid reveal"><div><p class="eyebrow"><span></span> Payment terms</p><h2>Clear milestones. No surprise handover.</h2></div><div class="payment-steps"><div><span>50%</span><p><strong>Deposit</strong>Paid before full production work begins.</p></div><div><span>50%</span><p><strong>Final payment</strong>Paid before final launch or handover.</p></div><small>Complex projects may use agreed milestone payments where appropriate.</small></div></div></section>
 
-        <div class="estimator-hud-box">
-          <!-- Left Controls -->
-          <div class="estimator-controls">
-            <div class="hud-group">
-              <label for="est-industry" class="hud-label">Select Business Industry</label>
-              <select id="est-industry" class="hud-select">
-                <option value="photography">Photography &amp; Creative Studio</option>
-                <option value="beauty">Salon, Spa &amp; Aesthetic Studio</option>
-                <option value="barber">Barbershop &amp; Grooming Lounge</option>
-                <option value="dining">Cafe, Restaurant &amp; F&amp;B</option>
-                <option value="automotive">Automotive Workshop &amp; Detailing</option>
-                <option value="professional">Consulting, Clinic &amp; Corporate</option>
-              </select>
-            </div>
-
-            <div class="hud-group">
-              <label for="est-tier" class="hud-label">System Architecture Tier</label>
-              <select id="est-tier" class="hud-select">
-                <option value="starter">Launch Core (Essential Single Page Landing) — RM 1,199</option>
-                <option value="conversion" selected>Conversion Pro (Full Funnel &amp; WhatsApp Engine) — RM 1,899</option>
-                <option value="scale">Enterprise Autonomous (Custom Multi-Page &amp; Integrations) — RM 2,899</option>
-              </select>
-            </div>
-
-            <div class="hud-group">
-              <label class="hud-label">Optional High-Voltage Modules</label>
-              <div class="features-check-grid">
-                <label class="feature-checkbox-label">
-                  <input type="checkbox" class="est-feature" data-name="WhatsApp Booking Engine" data-price="200" checked>
-                  <span>WhatsApp Booking Builder (+RM200)</span>
-                </label>
-                <label class="feature-checkbox-label">
-                  <input type="checkbox" class="est-feature" data-name="5.0 Google Review Sync" data-price="150" checked>
-                  <span>Google Review Sync (+RM150)</span>
-                </label>
-                <label class="feature-checkbox-label">
-                  <input type="checkbox" class="est-feature" data-name="Interactive Menu / Gallery" data-price="150" checked>
-                  <span>Interactive Portfolio/Menu (+RM150)</span>
-                </label>
-                <label class="feature-checkbox-label">
-                  <input type="checkbox" class="est-feature" data-name="Local SEO & Maps Sync" data-price="200">
-                  <span>Google Maps SEO (+RM200)</span>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right Live Output Screen -->
-          <div class="estimator-output-screen">
-            <div>
-              <div class="output-header">
-                <span>NEXURA SPRINT ESTIMATE</span>
-                <span>STATUS: READY</span>
-              </div>
-
-              <div class="output-price-display">
-                <span class="label">ESTIMATED INVESTMENT</span>
-                <div id="est-price-display" class="price">RM 2,399</div>
-                <div class="sub">50% Deposit upon prototype approval • 50% on launch</div>
-              </div>
-
-              <ul class="output-breakdown">
-                <li>• Sprint Timeline: <strong id="est-timeline-display" style="color: #FFFFFF;">5–7 Business Days</strong></li>
-                <li>• Free 24h Interactive Demo before payment</li>
-                <li>• Domain &amp; High-Speed Cloud Deployment</li>
-                <li>• 100% Mobile &amp; Tablet Optimized</li>
-              </ul>
-            </div>
-
-            <div>
-              <button type="button" id="est-whatsapp-btn" class="btn btn-whatsapp" style="width: 100%; font-size: 0.9rem; padding: 0.85rem;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                <span>Request Your 24h Prototype via WhatsApp</span>
-              </button>
-            </div>
-          </div>
-        </div>
+    <section class="section faq-section" id="faq"><div class="container faq-grid">
+      <div class="faq-intro reveal"><p class="eyebrow"><span></span> Common questions</p><h2>Useful answers before we talk.</h2><p>Still unsure which package fits? Start with your business goal, not a feature list.</p></div>
+      <div class="accordion">
+        <details class="reveal"><summary>How long does a website take?</summary><p>The timeline depends on the number of pages, content readiness and functionality. A realistic delivery window is confirmed with the project scope before work begins.</p></details>
+        <details class="reveal"><summary>Do I need to provide photos and content?</summary><p>For the final website, you should provide accurate business information and approved assets such as your logo, shop, team, service and product photos. I can help organise the content and identify what is missing.</p></details>
+        <details class="reveal"><summary>Do you provide domain and hosting?</summary><p>Starter includes first-year hosting. Business includes a domain and hosting for the first year. Renewals and ongoing care are made clear before approval.</p></details>
+        <details class="reveal"><summary>Can you integrate WhatsApp?</summary><p>Yes. WhatsApp buttons and prepared enquiry flows can make it easier for customers to contact the business with useful information.</p></details>
+        <details class="reveal"><summary>Can you add booking or payment functionality?</summary><p>Yes, where appropriate. These features are scoped based on the required provider, workflow and complexity, then quoted before development.</p></details>
+        <details class="reveal"><summary>Can you manage the website after launch?</summary><p>Yes. Optional monthly or annual website care is available. Larger redesigns, new pages and new functionality are quoted separately.</p></details>
+        <details class="reveal"><summary>How does payment work?</summary><p>A 50% deposit is required before full production begins. The remaining 50% is paid before final launch or handover. Complex projects may use agreed milestones.</p></details>
+        <details class="reveal"><summary>Can I request changes?</summary><p>Starter includes one revision and Business includes two. A revision means a collected round of reasonable changes within the agreed scope. New scope is quoted separately.</p></details>
       </div>
-    </section>
+    </div></section>
 
-    <!-- ======================================================================
-         PRICING TIERS
-         ====================================================================== -->
-    <section id="pricing" class="pricing-section">
-      <div class="container">
-        <div style="text-align: center; max-width: 650px; margin: 0 auto;">
-          <span class="section-tag">Predictable Investment</span>
-          <h2 class="section-title">Transparent Architecture Tiers</h2>
-          <p class="section-desc">
-            No surprise invoices. No hidden lock-in fees. Transparent deliverables tailored to your business stage.
-          </p>
-        </div>
-
-        <div class="pricing-grid">
-          <!-- Tier 1 -->
-          <div class="pricing-card">
-            <h3>Launch Core</h3>
-            <p>Perfect for new startups wanting a polished, professional web presence.</p>
-            <div class="pricing-cost">
-              <span class="amount">RM 1,199</span>
-              <span class="period">/ one-time</span>
-            </div>
-            <ul class="pricing-features">
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>High-Impact Single Page Landing</span></li>
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Direct WhatsApp Contact Link</span></li>
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Google Maps Location Card</span></li>
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Free 24h Demo Concept</span></li>
-            </ul>
-            <a href="#estimator" class="btn btn-cyber-outline" style="width: 100%;">Select Tier</a>
-          </div>
-
-          <!-- Tier 2 (Featured) -->
-          <div class="pricing-card featured">
-            <span class="pricing-badge">RECOMMENDED</span>
-            <h3>Conversion Pro</h3>
-            <p>The sweet spot for established local businesses that need active customer bookings.</p>
-            <div class="pricing-cost">
-              <span class="amount">RM 1,899</span>
-              <span class="period">/ one-time</span>
-            </div>
-            <ul class="pricing-features">
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Full High-Conversion Architecture</span></li>
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>WhatsApp Booking Inquiry Builder</span></li>
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>5.0 Google Review Sync &amp; Feedback Form</span></li>
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Interactive Portfolio / Lightbox Gallery</span></li>
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>5–7 Business Days Turnaround</span></li>
-            </ul>
-            <a href="#estimator" class="btn btn-cyan" style="width: 100%;">Select Tier</a>
-          </div>
-
-          <!-- Tier 3 -->
-          <div class="pricing-card">
-            <h3>Enterprise Scale</h3>
-            <p>For high-volume businesses requiring multi-page setups and custom workflows.</p>
-            <div class="pricing-cost">
-              <span class="amount">RM 2,899</span>
-              <span class="period">/ one-time</span>
-            </div>
-            <ul class="pricing-features">
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Multi-Page Custom Framework</span></li>
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Payment Gateway / ToyyibPay / Stripe</span></li>
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Multi-Location SEO Architecture</span></li>
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Priority Sprint &amp; Dedicated Support</span></li>
-            </ul>
-            <a href="#estimator" class="btn btn-cyber-outline" style="width: 100%;">Select Tier</a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <section class="contact-section" id="contact"><div class="container contact-grid">
+      <div class="contact-copy reveal"><p class="eyebrow"><span></span> Get a website</p><h2>Tell me what your business needs online.</h2><p>Complete the short brief to prepare a clear project summary. This is a low-pressure starting point—not a commitment to buy.</p><div class="contact-status"><span></span><div><strong>Accepting selected local-business projects</strong><small>Malaysia · Remote-friendly</small></div></div></div>
+      <form class="brief-form reveal" id="project-brief"><div class="form-row"><label>Business name<input name="business" type="text" autocomplete="organization" placeholder="e.g. Your Studio" required></label><label>Your name<input name="name" type="text" autocomplete="name" placeholder="e.g. Sarah" required></label></div><label>What does your business do?<textarea name="businessType" rows="3" placeholder="A short description is enough" required></textarea></label><div class="form-row"><label>Main goal<select name="goal"><option>Get more enquiries</option><option>Build trust online</option><option>Showcase work or services</option><option>Enable bookings</option><option>Accept online payments</option><option>Something else</option></select></label><label>Package interest<select name="package" id="package-interest"><option>Not sure yet</option><option>Starter</option><option>Business</option><option>Business+</option><option>Website Care</option><option>Annual Website Care</option></select></label></div><label>Anything else?<textarea name="notes" rows="3" placeholder="Current website, deadline, pages or required features…"></textarea></label><div class="form-action"><button class="button button-primary" type="submit">Prepare Project Brief <span aria-hidden="true">↗</span></button><p id="form-status" role="status" aria-live="polite">No information is uploaded or stored.</p></div></form>
+    </div></section>
   </main>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="brand-brand" style="margin-bottom: 1rem;">
-            <div class="brand-icon"></div>
-            <div class="brand-title-wrap">
-              <span class="brand-name">NEXURA<span>LABS</span></span>
-              <span class="brand-subtitle">DIGITAL SYSTEMS</span>
-            </div>
-          </div>
-          <p>
-            An independent web engineering laboratory based in Kuala Lumpur, Malaysia. We build conversion-driven digital platforms for ambitious local businesses.
-          </p>
-          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--matrix-green); margin-top: 1rem;">
-            STATUS: ACTIVE SPRINT CYCLE // LEAD DEVELOPER: AFIQ AMRI
-          </div>
-        </div>
-
-        <div class="footer-col">
-          <h4>Navigation</h4>
-          <ul class="footer-links">
-            <li><a href="#hero">Command Center</a></li>
-            <li><a href="#demos">Client Demo Hub</a></li>
-            <li><a href="#protocol">The 4-Step Protocol</a></li>
-            <li><a href="#capabilities">Core Capabilities</a></li>
-            <li><a href="#estimator">Project Estimator</a></li>
-            <li><a href="#pricing">Architecture Tiers</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4>Live Client Demos</h4>
-          <ul class="footer-links">
-            <li><a href="demo/maymorii/" target="_blank" rel="noopener noreferrer">Maymorii Studio (Photography) ↗</a></li>
-            <li><a href="#demos">Apex Barber (In Lab)</a></li>
-            <li><a href="#demos">Kuro Kopi (In Lab)</a></li>
-            <li><a href="#demos">Titan Auto (In Lab)</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4>Direct Transmission</h4>
-          <ul class="footer-links" style="font-family: var(--font-mono); font-size: 0.8rem;">
-            <li>WhatsApp: <a href="https://wa.me/601116840840" style="color: var(--neon-cyan);">+60 11-1684 0840</a></li>
-            <li>Base: Kuala Lumpur &amp; Cheras</li>
-            <li>Hours: Mon – Sat // 09:00 – 19:00</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div>&copy; 2026 NEXURA LABS. All rights reserved. Engineered with precision.</div>
-        <div>
-          <span>HOSTED MULTI-DEMO INFRASTRUCTURE // HIGH PERFORMANCE</span>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Interactive Scripts -->
+  <footer class="site-footer"><div class="container footer-top"><a class="brand" href="#top" aria-label="NEXURA LABS home"><span class="brand-mark" aria-hidden="true"><span></span></span><span>NEXURA <b>LABS</b></span></a><p>Professional websites for Malaysian local businesses.</p><a href="#top" class="back-top">Back to top ↑</a></div><div class="container footer-bottom"><span>© <span id="current-year"></span> NEXURA LABS</span><span>Web developer for local businesses in Malaysia</span><span>Independent studio by Afiq Amri</span></div></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite">Project brief copied</div>
   <script src="assets/js/agency.js"></script>
 </body>
 </html>

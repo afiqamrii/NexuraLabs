@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://afiqamrii.github.io/Maymorii_Studio_Web/sitemap.xml

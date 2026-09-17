@@ -1,0 +1,48 @@
+{
+  "businessName": "Example Local Business",
+  "category": "Salon",
+  "description": "A short, factual description based on public business information.",
+  "services": [
+    "Service one",
+    "Service two",
+    "Service three"
+  ],
+  "address": "City, State, Malaysia",
+  "phone": "+60 00-000 0000",
+  "whatsapp": "60000000000",
+  "openingHours": [
+    "Monday-Saturday: 10:00 AM-7:00 PM",
+    "Sunday: Closed"
+  ],
+  "socialLinks": {
+    "instagram": "",
+    "facebook": "",
+    "tiktok": "",
+    "googleMaps": ""
+  },
+  "theme": {
+    "primaryColor": "#54e6df",
+    "secondaryColor": "#0b1119",
+    "displayFont": "Manrope",
+    "bodyFont": "Inter",
+    "styleKeywords": [
+      "professional",
+      "local",
+      "conversion-focused"
+    ]
+  },
+  "images": [
+    {
+      "src": "",
+      "alt": "",
+      "source": "client-approved, licensed, or public listing",
+      "approvedForProduction": false
+    }
+  ],
+  "proof": {
+    "rating": null,
+    "reviewCount": null,
+    "sourceUrl": ""
+  },
+  "disclosure": "Independent website concept created by Nexura Labs. Not an official client website unless confirmed in writing."
+}

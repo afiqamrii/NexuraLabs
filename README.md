@@ -1,96 +1,73 @@
-# NEXURA LABS — High-Conversion Digital Systems & Central Demo Hub
+# NEXURA LABS
 
-**NEXURA LABS** is a futuristic, conversion-focused web engineering agency and multi-demo platform founded by Afiq Amri.
+Conversion-focused websites for Malaysian local businesses, supported by a reusable demo-first sales system.
 
-Instead of paying for separate domains and hosting accounts for every prospect, **NEXURA LABS** serves as your central agency headquarters (`/`) while hosting unlimited live client prototypes under `/demo/[client-name]`.
+## Project structure
 
----
-
-## 🏛️ System Architecture & Folder Structure
-
-```
-Nexura_Labs/
-├── package.json               # Project manifest & dev scripts ("nexura-labs")
-├── index.html                 # NEXURA LABS Main Agency Website (Root /)
-├── assets/
-│   ├── css/
-│   │   └── futuristic.css     # Cyber-luxe black styling, HUD cards, neon glow utilities
-│   └── js/
-│       └── agency.js          # Interactive particle canvas, terminal simulation, project estimator
-│
-├── demo/                      # Central Client Demo Directory
-│   └── maymorii/              # First Live Client Prototype: Maymorii Studio
-│       ├── index.html         # Maymorii Studio landing page (/demo/maymorii/)
-│       ├── css/style.css      # Editorial luxury photography styling
-│       └── js/main.js         # Lightbox, review submission form, WhatsApp builder
-│
-└── README.md                  # System documentation & deployment guide
+```text
+NEXURA_LABS/
+|-- index.html                         # Main Nexura Labs website
+|-- assets/
+|   |-- css/futuristic.css            # Design system and responsive styles
+|   |-- js/agency.js                  # Navigation, reveals, form and motion
+|   `-- favicon.svg                   # Nexura Labs browser icon
+|-- demo/
+|   |-- _template/
+|   |   `-- business-data.example.json # Reusable client-demo data model
+|   `-- maymorii/                     # Independent Maymorii concept
+|-- operations/
+|   |-- lead-tracker-template.csv     # Lightweight sales pipeline
+|   `-- outreach-scripts.md           # Honest outreach and follow-ups
+|-- robots.txt
+|-- sitemap.xml
+|-- .github/workflows/deploy.yml      # GitHub Pages deployment
+`-- package.json
 ```
 
----
+The main agency site and every demo keep separate styles and scripts. This avoids accidental design conflicts and allows each concept to move into its own production repository later.
 
-## ⚡ The NEXURA Sales Workflow (The "Demo-First" Model)
+## Current offer
 
-```
-Prospect Discovery (Google Maps)
-               │
-               ▼
-Rapid Prototype Deployment (24–48 Hours)
-Hosted at: nexuralabs.com/demo/[business-name]
-               │
-               ▼
-Outreach to Business Owner:
-"I noticed you don't have a website, so I built a quick concept specifically for your business:
-nexuralabs.com/demo/[business-name]"
-               │
-               ▼
-Client Review & WOW Factor
-               │
-               ▼
-50% Deposit Paid ➔ Final Website Migrated to Client's Domain
-               │
-               ▼
-Monthly Maintenance (RM 99/month)
-```
+- Starter: RM899
+- Business: RM1499 (recommended)
+- Business+: from RM2499
+- Website Care: RM79/month
+- Annual Website Care: RM399/year
 
----
+Normal payment terms are 50% before production and 50% before launch. Complex projects may use written milestone payments.
 
-## 🚀 How to Add a New Client Demo in 10 Minutes
+## Run locally
 
-When you want to create a new demo for a cafe, barber, or workshop:
-
-1. Create a new folder under `demo/`:
-   ```bash
-   demo/abc-barber/
-   ├── index.html
-   ├── css/style.css
-   └── js/main.js
-   ```
-2. Customize the copy, colors, and WhatsApp link for that business.
-3. It automatically becomes available at:
-   `https://nexuralabs.com/demo/abc-barber`
-4. Add the card to the **Client Demo Hub** on the main NEXURA LABS page (`index.html`).
-
----
-
-## 💻 Running & Hosting Locally
-
-### Option 1: Using npm
 ```bash
-# Start local server
-npm run dev
-
-# Or with python
 python -m http.server 8088
 ```
-Visit:
-- Main Agency Site: `http://localhost:8088/`
-- Maymorii Studio Demo: `http://localhost:8088/demo/maymorii/`
 
-### Option 2: Deploying to the Web for Free
-You can deploy this entire repository to **Vercel**, **Netlify**, or **Cloudflare Pages** in 60 seconds with **Zero Cost**:
-1. Push this folder to a GitHub repository named `nexura-labs`.
-2. Connect the repository to [Vercel](https://vercel.com) or [Netlify](https://netlify.com).
-3. Set build settings to **Static HTML** (no build command needed).
-4. Connect your custom domain (e.g., `nexuralabs.com`).
-5. Your main site will be at `nexuralabs.com` and your demos will be live at `nexuralabs.com/demo/maymorii`!
+- Agency: `http://localhost:8088/`
+- Maymorii concept: `http://localhost:8088/demo/maymorii/`
+
+Check JavaScript syntax with:
+
+```bash
+npm run check:js
+```
+
+## Deployment
+
+The workflow in `.github/workflows/deploy.yml` publishes this static project to GitHub Pages whenever `main` is updated. No build step is required.
+
+When the repository or domain changes, update the canonical URL in `index.html`, plus the URLs in `robots.txt` and `sitemap.xml`.
+
+## Important launch checklist
+
+1. Add Afiq's real agency WhatsApp number or email destination. The form currently builds and copies a project brief without sending it anywhere.
+2. Confirm pricing and scope before every quotation.
+3. Connect the final branded domain, canonical URL, and social preview image.
+4. Replace remote concept imagery with licensed or client-approved assets before production launch.
+5. Test every contact, booking, payment, analytics, and form integration on the production domain.
+
+## Demo policy
+
+- Label every speculative concept as independent and unofficial.
+- Never route agency leads to a client's contact details.
+- Do not invent results, testimonials, ratings, awards, or client relationships.
+- Move a signed client's production site to their own approved domain and infrastructure.

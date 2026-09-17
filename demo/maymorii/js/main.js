@@ -1,516 +1,293 @@
-/**
- * MAYMORII STUDIO — Interactive Scripts
- * Client demo prototype functionalities:
- * - Mobile Navigation Drawer
- * - Filterable Portfolio Gallery
- * - Modal Lightbox
- * - WhatsApp Booking Session Builder (targeted to 601116840840)
- * - Interactive Customer Feedback Form & Star Rating Picker
- * - LocalStorage Review Persistence & Toast Notifications
- * - FAQ Accordion & Quick Address Copy
- */
-
 document.addEventListener('DOMContentLoaded', () => {
-  initHeaderScroll();
-  initMobileDrawer();
-  initGalleryFilters();
-  initLightbox();
-  initBookingModal();
-  initFeedbackForm();
-  initFaqAccordion();
-  initCopyAddress();
+  initHeader();
+  initMobileBookingBar();
+  initNavigation();
+  initReveals();
+  initResultsSlider();
+  initGallery();
+  initBooking();
+  initFeedbackPreview();
+  initAddressCopy();
+  document.getElementById('year').textContent = new Date().getFullYear();
 });
 
-/* ==========================================================================
-   1. HEADER SCROLL EFFECT
-   ========================================================================== */
-function initHeaderScroll() {
-  const header = document.querySelector('.site-header');
+function initHeader() {
+  const header = document.querySelector('[data-header]');
   if (!header) return;
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  }, { passive: true });
+  const update = () => header.classList.toggle('is-scrolled', window.scrollY > 20);
+  update();
+  window.addEventListener('scroll', update, { passive: true });
 }
 
-/* ==========================================================================
-   2. MOBILE NAVIGATION DRAWER
-   ========================================================================== */
-function initMobileDrawer() {
-  const toggleBtn = document.querySelector('.mobile-toggle');
-  const drawer = document.querySelector('.mobile-drawer');
-  const closeBtn = document.querySelector('.drawer-close');
-  const drawerLinks = document.querySelectorAll('.drawer-links a');
-
-  if (!toggleBtn || !drawer) return;
-
-  const openDrawer = () => {
-    drawer.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeDrawer = () => {
-    drawer.classList.remove('open');
-    document.body.style.overflow = '';
-  };
-
-  toggleBtn.addEventListener('click', openDrawer);
-  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
-
-  drawer.addEventListener('click', (e) => {
-    if (e.target === drawer) closeDrawer();
-  });
-
-  drawerLinks.forEach(link => {
-    link.addEventListener('click', closeDrawer);
-  });
+function initMobileBookingBar() {
+  const bar = document.querySelector('.mobile-booking-bar');
+  if (!bar) return;
+  const update = () => bar.classList.toggle('is-visible', window.scrollY > 520);
+  update();
+  window.addEventListener('scroll', update, { passive: true });
 }
 
-/* ==========================================================================
-   3. FILTERABLE PORTFOLIO GALLERY
-   ========================================================================== */
-function initGalleryFilters() {
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const galleryItems = document.querySelectorAll('.gallery-item');
+function initNavigation() {
+  const toggle = document.querySelector('.nav-toggle');
+  const navigation = document.getElementById('site-nav');
+  if (!toggle || !navigation) return;
 
-  if (!filterBtns.length || !galleryItems.length) return;
+  const close = () => {
+    toggle.setAttribute('aria-expanded', 'false');
+    navigation.classList.remove('is-open');
+    document.body.classList.remove('is-locked');
+  };
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+  toggle.addEventListener('click', () => {
+    const willOpen = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(willOpen));
+    navigation.classList.toggle('is-open', willOpen);
+    document.body.classList.toggle('is-locked', willOpen);
+  });
 
-      const filterValue = btn.getAttribute('data-filter');
+  navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', close));
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') close(); });
+  window.addEventListener('resize', () => { if (window.innerWidth > 780) close(); });
+}
 
-      galleryItems.forEach(item => {
-        const itemCat = item.getAttribute('data-category');
-        if (filterValue === 'all' || filterValue === itemCat) {
-          item.style.display = 'block';
-          setTimeout(() => {
-            item.style.opacity = '1';
-            item.style.transform = 'scale(1)';
-          }, 10);
-        } else {
-          item.style.opacity = '0';
-          item.style.transform = 'scale(0.95)';
-          setTimeout(() => {
-            item.style.display = 'none';
-          }, 200);
-        }
-      });
+function initReveals() {
+  const elements = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    elements.forEach((element) => element.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -35px' });
+
+  elements.forEach((element) => observer.observe(element));
+}
+
+function initResultsSlider() {
+  const slider = document.querySelector('[data-results-slider]');
+  if (!slider) return;
+  const slides = Array.from(slider.querySelectorAll('[data-result-slide]'));
+  const dots = Array.from(slider.querySelectorAll('[data-slide-dot]'));
+  const previous = slider.querySelector('[data-slider-prev]');
+  const next = slider.querySelector('[data-slider-next]');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let activeIndex = 0;
+  let timer = null;
+  let isInView = false;
+  let isPaused = false;
+  let pointerStart = null;
+
+  const showSlide = (requestedIndex, restart = true) => {
+    activeIndex = (requestedIndex + slides.length) % slides.length;
+    slides.forEach((slide, index) => {
+      const isActive = index === activeIndex;
+      slide.classList.toggle('is-active', isActive);
+      slide.setAttribute('aria-hidden', String(!isActive));
+    });
+    dots.forEach((dot, index) => {
+      const isActive = index === activeIndex;
+      dot.classList.toggle('is-active', isActive);
+      if (isActive) dot.setAttribute('aria-current', 'true');
+      else dot.removeAttribute('aria-current');
+    });
+    if (restart) start();
+  };
+
+  const stop = () => {
+    window.clearInterval(timer);
+    timer = null;
+  };
+
+  const start = () => {
+    stop();
+    if (reduceMotion || !isInView || isPaused || document.hidden) return;
+    timer = window.setInterval(() => showSlide(activeIndex + 1, false), 5500);
+  };
+
+  previous?.addEventListener('click', () => showSlide(activeIndex - 1));
+  next?.addEventListener('click', () => showSlide(activeIndex + 1));
+  dots.forEach((dot) => dot.addEventListener('click', () => showSlide(Number(dot.dataset.slideDot))));
+
+  slider.addEventListener('mouseenter', () => { isPaused = true; stop(); });
+  slider.addEventListener('mouseleave', () => { isPaused = false; start(); });
+  slider.addEventListener('focusin', () => { isPaused = true; stop(); });
+  slider.addEventListener('focusout', (event) => {
+    if (!slider.contains(event.relatedTarget)) { isPaused = false; start(); }
+  });
+
+  slider.addEventListener('pointerdown', (event) => { pointerStart = event.clientX; });
+  slider.addEventListener('pointerup', (event) => {
+    if (pointerStart === null) return;
+    const distance = event.clientX - pointerStart;
+    pointerStart = null;
+    if (Math.abs(distance) < 45) return;
+    showSlide(activeIndex + (distance < 0 ? 1 : -1));
+  });
+
+  document.addEventListener('visibilitychange', start);
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(([entry]) => {
+      isInView = entry.isIntersecting;
+      start();
+    }, { threshold: 0.3 });
+    observer.observe(slider);
+  } else {
+    isInView = true;
+    start();
+  }
+
+  showSlide(0, false);
+}
+
+function initGallery() {
+  const filters = document.querySelectorAll('.filter-button');
+  const items = document.querySelectorAll('.gallery-item');
+  const lightbox = document.getElementById('lightbox');
+
+  filters.forEach((filter) => {
+    filter.addEventListener('click', () => {
+      const category = filter.dataset.filter;
+      filters.forEach((button) => button.classList.toggle('is-active', button === filter));
+      items.forEach((item) => { item.hidden = category !== 'all' && item.dataset.category !== category; });
     });
   });
-}
 
-/* ==========================================================================
-   4. MODAL LIGHTBOX
-   ========================================================================== */
-function initLightbox() {
-  const lightbox = document.getElementById('lightbox-dialog');
-  if (!lightbox) return;
-
-  const lightboxImg = lightbox.querySelector('.lightbox-img');
-  const lightboxTitle = lightbox.querySelector('.lightbox-title');
-  const lightboxCat = lightbox.querySelector('.lightbox-cat');
-  const closeBtn = lightbox.querySelector('.lightbox-close-btn');
-  const bookBtn = lightbox.querySelector('.lightbox-book-trigger');
-
-  const galleryItems = document.querySelectorAll('.gallery-item');
-
-  galleryItems.forEach(item => {
+  items.forEach((item) => {
     item.addEventListener('click', () => {
-      const img = item.querySelector('img');
-      const title = item.querySelector('.gallery-overlay h4')?.textContent || 'Studio Photography';
-      const cat = item.querySelector('.gallery-overlay .cat')?.textContent || 'Maymorii Studio';
-
-      if (lightboxImg && img) lightboxImg.src = img.src;
-      if (lightboxTitle) lightboxTitle.textContent = title;
-      if (lightboxCat) lightboxCat.textContent = cat;
-
-      if (typeof lightbox.showModal === 'function') {
-        lightbox.showModal();
-      } else {
-        lightbox.setAttribute('open', '');
-      }
+      if (!lightbox) return;
+      const image = lightbox.querySelector('img');
+      const title = lightbox.querySelector('strong');
+      image.src = item.dataset.image || item.querySelector('img').src;
+      image.alt = item.querySelector('img').alt;
+      title.textContent = item.dataset.title || 'Concept gallery image';
+      openDialog(lightbox);
     });
   });
 
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      if (typeof lightbox.close === 'function') {
-        lightbox.close();
-      } else {
-        lightbox.removeAttribute('open');
-      }
-    });
-  }
-
-  // Dismiss on backdrop click
-  lightbox.addEventListener('click', (e) => {
-    const rect = lightbox.getBoundingClientRect();
-    const isInDialog = (
-      rect.top <= e.clientY &&
-      e.clientY <= rect.top + rect.height &&
-      rect.left <= e.clientX &&
-      e.clientX <= rect.left + rect.width
-    );
-    if (!isInDialog) {
-      lightbox.close();
-    }
-  });
-
-  if (bookBtn) {
-    bookBtn.addEventListener('click', () => {
-      lightbox.close();
-      openBookingModal(lightboxCat?.textContent || 'Studio Photography');
-    });
-  }
+  document.querySelector('[data-close-lightbox]')?.addEventListener('click', () => lightbox?.close());
+  lightbox?.addEventListener('click', (event) => { if (event.target === lightbox) lightbox.close(); });
 }
 
-/* ==========================================================================
-   5. WHATSAPP SESSION BOOKING MODAL
-   ========================================================================== */
-function initBookingModal() {
-  const bookingDialog = document.getElementById('booking-dialog');
-  if (!bookingDialog) return;
+function initBooking() {
+  const dialog = document.getElementById('booking-dialog');
+  const form = document.getElementById('booking-form');
+  const serviceSelect = document.getElementById('booking-service');
+  const dateInput = document.getElementById('booking-date');
+  if (!dialog || !form || !serviceSelect) return;
 
-  const closeBtn = bookingDialog.querySelector('.modal-close-btn');
-  const bookingForm = document.getElementById('booking-inquiry-form');
-  const serviceTriggers = document.querySelectorAll('[data-open-booking]');
+  if (dateInput) dateInput.min = new Date().toISOString().split('T')[0];
 
-  serviceTriggers.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const serviceName = btn.getAttribute('data-service') || 'General Session Inquiry';
-      openBookingModal(serviceName);
+  document.querySelectorAll('[data-open-booking]').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const requestedService = trigger.dataset.service || 'Not sure yet';
+      const option = Array.from(serviceSelect.options).find((item) => item.value === requestedService);
+      serviceSelect.value = option ? requestedService : 'Not sure yet';
+      openDialog(dialog);
     });
   });
 
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => bookingDialog.close());
-  }
+  document.querySelector('[data-close-dialog]')?.addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
 
-  bookingDialog.addEventListener('click', (e) => {
-    const rect = bookingDialog.getBoundingClientRect();
-    const isInDialog = (
-      rect.top <= e.clientY &&
-      e.clientY <= rect.top + rect.height &&
-      rect.left <= e.clientX &&
-      e.clientX <= rect.left + rect.width
-    );
-    if (!isInDialog) bookingDialog.close();
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const name = document.getElementById('booking-name').value.trim();
+    const service = serviceSelect.value;
+    const date = dateInput?.value || 'Flexible / to discuss';
+    const pax = document.getElementById('booking-pax').value || '1';
+    const notes = document.getElementById('booking-notes').value.trim();
+    const message = [
+      'Hello Maymorii Studio!',
+      '',
+      `My name is ${name}.`,
+      `I am interested in: ${service}.`,
+      `Preferred date: ${date}.`,
+      `Number of people: ${pax}.`,
+      notes ? `Notes: ${notes}` : '',
+      '',
+      'Could you share availability, suitable options and pricing? Thank you.'
+    ].filter(Boolean).join('\n');
+
+    const url = `https://wa.me/601116840840?text=${encodeURIComponent(message)}`;
+    dialog.close();
+    showToast('Opening WhatsApp with your enquiry…');
+    window.setTimeout(() => window.open(url, '_blank', 'noopener,noreferrer'), 250);
   });
+}
 
-  if (bookingForm) {
-    bookingForm.addEventListener('submit', (e) => {
-      e.preventDefault();
+function initFeedbackPreview() {
+  const form = document.getElementById('feedback-form');
+  const preview = document.getElementById('preview-review');
+  const stars = document.querySelectorAll('.star-picker button');
+  if (!form || !preview || !stars.length) return;
 
-      const name = document.getElementById('bk-name')?.value.trim() || 'Valued Client';
-      const service = document.getElementById('bk-service')?.value || 'Portrait Session';
-      const date = document.getElementById('bk-date')?.value || 'Flexible / Upcoming';
-      const timeSlot = document.getElementById('bk-time')?.value || 'Morning / Afternoon';
-      const pax = document.getElementById('bk-pax')?.value || '1';
-      const notes = document.getElementById('bk-notes')?.value.trim();
-
-      let message = `Hello Maymorii Studio! 📸\n\nI would like to enquire about booking a photo session:\n` +
-        `• Name: ${name}\n` +
-        `• Service Package: ${service}\n` +
-        `• Number of Pax: ${pax} person(s)\n` +
-        `• Preferred Date: ${date} (${timeSlot})\n`;
-
-      if (notes) {
-        message += `• Special Notes/Theme: ${notes}\n`;
-      }
-
-      message += `\nCould you please share your availability and package details? Thank you!`;
-
-      const whatsappUrl = `https://wa.me/601116840840?text=${encodeURIComponent(message)}`;
-
-      bookingDialog.close();
-      showToast('Opening WhatsApp with your booking details...');
-      setTimeout(() => {
-        window.open(whatsappUrl, '_blank');
-      }, 350);
+  let rating = 5;
+  const renderStars = (value) => {
+    stars.forEach((star) => {
+      const active = Number(star.dataset.rating) <= value;
+      star.classList.toggle('is-active', active);
+      star.setAttribute('aria-checked', String(Number(star.dataset.rating) === value));
     });
-  }
-}
-
-function openBookingModal(defaultService = '') {
-  const bookingDialog = document.getElementById('booking-dialog');
-  if (!bookingDialog) return;
-
-  const serviceSelect = document.getElementById('bk-service');
-  if (serviceSelect && defaultService) {
-    for (let option of serviceSelect.options) {
-      if (option.text.toLowerCase().includes(defaultService.toLowerCase()) || 
-          defaultService.toLowerCase().includes(option.value.toLowerCase())) {
-        serviceSelect.value = option.value;
-        break;
-      }
-    }
-  }
-
-  bookingDialog.showModal();
-}
-
-/* ==========================================================================
-   6. INTERACTIVE CUSTOMER FEEDBACK FORM & REVIEWS
-   ========================================================================== */
-function initFeedbackForm() {
-  const form = document.getElementById('client-feedback-form');
-  const starBtns = document.querySelectorAll('.star-btn');
-  const ratingText = document.getElementById('rating-selected-text');
-  const reviewsContainer = document.getElementById('dynamic-reviews-list');
-
-  let currentRating = 5;
-
-  const ratingDescriptions = {
-    1: '1 Star — Needs Improvement',
-    2: '2 Stars — Fair Experience',
-    3: '3 Stars — Good Session',
-    4: '4 Stars — Very Good & Pleased',
-    5: '5 Stars — Outstanding & Loved It!'
   };
 
-  starBtns.forEach(btn => {
-    btn.addEventListener('mouseenter', () => {
-      const hoverVal = parseInt(btn.getAttribute('data-value'), 10);
-      updateStarsVisual(hoverVal, true);
+  stars.forEach((star) => {
+    star.setAttribute('role', 'radio');
+    star.addEventListener('click', () => {
+      rating = Number(star.dataset.rating);
+      renderStars(rating);
     });
-
-    btn.addEventListener('mouseleave', () => {
-      updateStarsVisual(currentRating, false);
-    });
-
-    btn.addEventListener('click', () => {
-      currentRating = parseInt(btn.getAttribute('data-value'), 10);
-      updateStarsVisual(currentRating, false);
-      if (ratingText) {
-        ratingText.textContent = ratingDescriptions[currentRating];
-      }
-    });
+    star.addEventListener('mouseenter', () => renderStars(Number(star.dataset.rating)));
+    star.addEventListener('mouseleave', () => renderStars(rating));
   });
+  renderStars(rating);
 
-  function updateStarsVisual(rating, isHover = false) {
-    starBtns.forEach(btn => {
-      const val = parseInt(btn.getAttribute('data-value'), 10);
-      if (val <= rating) {
-        btn.classList.add(isHover ? 'hovered' : 'active');
-      } else {
-        btn.classList.remove('hovered');
-        if (!isHover) btn.classList.remove('active');
-      }
-    });
-  }
-
-  // Load any previously saved reviews from localStorage
-  loadSavedReviews();
-
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const nameInput = document.getElementById('fb-name');
-      const phoneInput = document.getElementById('fb-phone');
-      const serviceInput = document.getElementById('fb-service');
-      const textInput = document.getElementById('fb-comments');
-
-      const name = nameInput.value.trim();
-      const service = serviceInput.value || 'Studio Portrait Session';
-      const comments = textInput.value.trim();
-
-      if (!name || !comments) {
-        showToast('Please fill in your name and feedback comments.');
-        return;
-      }
-
-      const newReview = {
-        name: name,
-        service: service,
-        rating: currentRating,
-        comments: comments,
-        date: 'Just now (Demo Submission)',
-        verified: true
-      };
-
-      // Save to localStorage
-      saveReviewLocally(newReview);
-
-      // Prepend to DOM
-      renderReviewCard(newReview, true);
-
-      // Reset form
-      form.reset();
-      currentRating = 5;
-      updateStarsVisual(5, false);
-      if (ratingText) ratingText.textContent = ratingDescriptions[5];
-
-      showToast(`Thank you, ${name}! Your 5.0★ feedback was added to the live demo preview.`);
-    });
-  }
-
-  function saveReviewLocally(review) {
-    try {
-      let reviews = JSON.parse(localStorage.getItem('maymorii_demo_reviews') || '[]');
-      reviews.unshift(review);
-      localStorage.setItem('maymorii_demo_reviews', JSON.stringify(reviews));
-    } catch (err) {
-      console.warn('Could not save to localStorage', err);
-    }
-  }
-
-  function loadSavedReviews() {
-    try {
-      const stored = localStorage.getItem('maymorii_demo_reviews');
-      if (stored) {
-        const reviews = JSON.parse(stored);
-        reviews.forEach(rev => renderReviewCard(rev, false));
-      }
-    } catch (err) {
-      console.warn('Could not load stored reviews', err);
-    }
-  }
-
-  function renderReviewCard(review, animate = false) {
-    if (!reviewsContainer) return;
-
-    const card = document.createElement('article');
-    card.className = 'review-card user-submitted-review';
-    if (animate) {
-      card.style.animation = 'fadeInUp 0.5s ease forwards';
-    }
-
-    const initials = review.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'MC';
-
-    let starsHtml = '';
-    for (let i = 1; i <= 5; i++) {
-      if (i <= review.rating) {
-        starsHtml += `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
-      } else {
-        starsHtml += `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
-      }
-    }
-
-    card.innerHTML = `
-      <div class="review-card-header">
-        <div class="reviewer-meta">
-          <div class="reviewer-avatar">${initials}</div>
-          <div>
-            <div class="reviewer-name">${escapeHTML(review.name)}</div>
-            <div class="review-verified">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>Verified Client • ${review.date}</span>
-            </div>
-          </div>
-        </div>
-        <div class="review-stars">${starsHtml}</div>
-      </div>
-      <p class="review-text">"${escapeHTML(review.comments)}"</p>
-      <span class="review-tag">${escapeHTML(review.service)}</span>
-    `;
-
-    reviewsContainer.prepend(card);
-  }
-}
-
-/* ==========================================================================
-   7. FAQ ACCORDION
-   ========================================================================== */
-function initFaqAccordion() {
-  const faqItems = document.querySelectorAll('.faq-item');
-
-  faqItems.forEach(item => {
-    const trigger = item.querySelector('.faq-trigger');
-    if (!trigger) return;
-
-    trigger.addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
-
-      // Close all other items
-      faqItems.forEach(other => {
-        if (other !== item) other.classList.remove('open');
-      });
-
-      // Toggle current item
-      if (isOpen) {
-        item.classList.remove('open');
-      } else {
-        item.classList.add('open');
-      }
-    });
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+    const data = new FormData(form);
+    preview.replaceChildren();
+    const name = document.createElement('strong');
+    const ratingLine = document.createElement('span');
+    const text = document.createElement('p');
+    name.textContent = `${data.get('reviewer')} · ${data.get('session')}`;
+    ratingLine.textContent = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+    text.textContent = `“${data.get('feedback')}”`;
+    preview.append(name, ratingLine, text);
+    preview.hidden = false;
+    showToast('Local feedback preview created—nothing was published.');
   });
 }
 
-/* ==========================================================================
-   8. COPY ADDRESS TO CLIPBOARD
-   ========================================================================== */
-function initCopyAddress() {
-  const copyBtns = document.querySelectorAll('[data-copy-address]');
-  const addressString = 'Unit 12-32, 2, Jalan Desa Aman 1, Cheras Business Centre, Cheras, 56100 Kuala Lumpur';
-
-  copyBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(addressString).then(() => {
-          showToast('Studio address copied to clipboard!');
-        }).catch(() => {
-          fallbackCopy(addressString);
-        });
-      } else {
-        fallbackCopy(addressString);
-      }
-    });
-  });
-
-  function fallbackCopy(text) {
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.style.position = 'fixed';
-    textarea.style.opacity = '0';
-    document.body.appendChild(textarea);
-    textarea.select();
+function initAddressCopy() {
+  const address = 'Unit 12-32, 2, Jalan Desa Aman 1, Cheras Business Centre, Cheras, 56100 Kuala Lumpur';
+  document.querySelector('[data-copy-address]')?.addEventListener('click', async () => {
     try {
-      document.execCommand('copy');
-      showToast('Studio address copied to clipboard!');
-    } catch (err) {
-      showToast('Address: ' + addressString);
+      await navigator.clipboard.writeText(address);
+      showToast('Studio address copied.');
+    } catch {
+      showToast(address);
     }
-    document.body.removeChild(textarea);
-  }
+  });
 }
 
-/* ==========================================================================
-   9. GLOBAL TOAST HELPER
-   ========================================================================== */
+function openDialog(dialog) {
+  if (typeof dialog.showModal === 'function') dialog.showModal();
+  else dialog.setAttribute('open', '');
+}
+
 function showToast(message) {
-  let toast = document.querySelector('.toast-notification');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.className = 'toast-notification';
-    document.body.appendChild(toast);
-  }
-
-  toast.innerHTML = `
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-    <span>${escapeHTML(message)}</span>
-  `;
-
-  toast.classList.add('show');
-
-  if (window._toastTimeout) clearTimeout(window._toastTimeout);
-  window._toastTimeout = setTimeout(() => {
-    toast.classList.remove('show');
-  }, 4000);
-}
-
-function escapeHTML(str) {
-  if (!str) return '';
-  return str.replace(/[&<>'"]/g, 
-    tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
-  );
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add('is-visible');
+  window.clearTimeout(window.maymoriiToastTimer);
+  window.maymoriiToastTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 3000);
 }

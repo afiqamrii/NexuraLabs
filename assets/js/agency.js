@@ -1,237 +1,180 @@
-/**
- * NEXURA LABS — Futuristic Cyber Systems & Interactive Engine
- * Features:
- * - Interactive Canvas Particle Grid with mouse repulsion/glow
- * - Live Terminal Diagnostics simulation
- * - Dynamic Project Scope & ROI Estimator
- * - Automated WhatsApp Message Generation targeting Afiq's WhatsApp (+601116840840)
- */
-
 document.addEventListener('DOMContentLoaded', () => {
-  initCyberCanvas();
-  initTerminalSimulation();
-  initEstimator();
+  initNavigation();
+  initHeader();
+  initReveals();
+  initPackageSelection();
+  initBriefForm();
+  initAmbientCanvas();
+  document.getElementById('current-year').textContent = new Date().getFullYear();
 });
 
-/* ==========================================================================
-   1. INTERACTIVE CYBER CANVAS (PARTICLE GRID MATRIX)
-   ========================================================================== */
-function initCyberCanvas() {
-  const canvas = document.getElementById('cyber-canvas');
-  if (!canvas) return;
+function initNavigation() {
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.site-nav');
+  if (!toggle || !nav) return;
 
-  const ctx = canvas.getContext('2d');
-  let width = canvas.width = window.innerWidth;
-  let height = canvas.height = window.innerHeight;
+  const closeMenu = () => {
+    toggle.setAttribute('aria-expanded', 'false');
+    nav.classList.remove('is-open');
+    document.body.classList.remove('nav-open');
+  };
 
-  let mouse = { x: width / 2, y: height / 2, radius: 150 };
-
-  window.addEventListener('resize', () => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
+  toggle.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+    nav.classList.toggle('is-open', !isOpen);
+    document.body.classList.toggle('nav-open', !isOpen);
   });
 
-  window.addEventListener('mousemove', (e) => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-  });
+  nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+  window.addEventListener('resize', () => { if (window.innerWidth > 760) closeMenu(); });
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeMenu(); });
+}
 
-  // Particle configuration
-  const particles = [];
-  const particleCount = Math.min(Math.floor((width * height) / 18000), 75);
+function initHeader() {
+  const header = document.querySelector('[data-header]');
+  if (!header) return;
+  const update = () => header.classList.toggle('is-scrolled', window.scrollY > 24);
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+}
 
-  class Particle {
-    constructor() {
-      this.x = Math.random() * width;
-      this.y = Math.random() * height;
-      this.vx = (Math.random() - 0.5) * 0.6;
-      this.vy = (Math.random() - 0.5) * 0.6;
-      this.radius = Math.random() * 1.5 + 1;
-      this.color = Math.random() > 0.3 ? 'rgba(0, 240, 255, ' : 'rgba(139, 92, 246, ';
-    }
+function initReveals() {
+  const items = document.querySelectorAll('.reveal');
+  if (!items.length || !('IntersectionObserver' in window)) {
+    items.forEach((item) => item.classList.add('is-visible'));
+    return;
+  }
 
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-
-      if (this.x < 0 || this.x > width) this.vx *= -1;
-      if (this.y < 0 || this.y > height) this.vy *= -1;
-
-      // Mouse repulsion
-      const dx = mouse.x - this.x;
-      const dy = mouse.y - this.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < mouse.radius) {
-        const angle = Math.atan2(dy, dx);
-        const force = (mouse.radius - dist) / mouse.radius;
-        this.x -= Math.cos(angle) * force * 2;
-        this.y -= Math.sin(angle) * force * 2;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
       }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -30px' });
+
+  items.forEach((item) => observer.observe(item));
+}
+
+function initPackageSelection() {
+  const packageSelect = document.getElementById('package-interest');
+  document.querySelectorAll('.choose-package').forEach((button) => {
+    button.addEventListener('click', () => {
+      if (packageSelect) packageSelect.value = button.dataset.package || 'Not sure yet';
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+      window.setTimeout(() => document.querySelector('#project-brief input')?.focus({ preventScroll: true }), 650);
+    });
+  });
+}
+
+function initBriefForm() {
+  const form = document.getElementById('project-brief');
+  const status = document.getElementById('form-status');
+  const toast = document.getElementById('toast');
+  if (!form || !status) return;
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const data = new FormData(form);
+    const summary = [
+      'NEXURA LABS — Project brief',
+      '',
+      `Business: ${data.get('business')}`,
+      `Contact: ${data.get('name')}`,
+      `Business type: ${data.get('businessType')}`,
+      `Main goal: ${data.get('goal')}`,
+      `Package interest: ${data.get('package')}`,
+      `Notes: ${data.get('notes') || 'None provided'}`
+    ].join('\n');
+
+    try {
+      await navigator.clipboard.writeText(summary);
+      status.textContent = 'Copied. Send the brief to Afiq using your agreed contact channel.';
+      toast?.classList.add('is-visible');
+      window.setTimeout(() => toast?.classList.remove('is-visible'), 2800);
+    } catch {
+      status.textContent = 'Copy was blocked by the browser. Select and copy the generated brief below.';
+      let output = document.getElementById('generated-brief');
+      if (!output) {
+        output = document.createElement('textarea');
+        output.id = 'generated-brief';
+        output.readOnly = true;
+        output.setAttribute('aria-label', 'Generated project brief');
+        output.rows = 10;
+        form.appendChild(output);
+      }
+      output.value = summary;
+      output.select();
     }
+  });
+}
 
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = this.color + '0.7)';
-      ctx.fill();
-    }
-  }
+function initAmbientCanvas() {
+  const canvas = document.getElementById('ambient-canvas');
+  if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const context = canvas.getContext('2d');
+  if (!context) return;
 
-  for (let i = 0; i < particleCount; i++) {
-    particles.push(new Particle());
-  }
+  let width = 0;
+  let height = 0;
+  let points = [];
+  let frameId;
 
-  function animate() {
-    ctx.clearRect(0, 0, width, height);
+  const resize = () => {
+    const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = Math.round(width * ratio);
+    canvas.height = Math.round(height * ratio);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    context.setTransform(ratio, 0, 0, ratio, 0, 0);
+    const count = Math.min(36, Math.max(16, Math.floor(width / 34)));
+    points = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.12,
+      vy: (Math.random() - 0.5) * 0.12
+    }));
+  };
 
-    // Draw connecting cyber lines
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+  const draw = () => {
+    context.clearRect(0, 0, width, height);
+    points.forEach((point, index) => {
+      point.x += point.vx;
+      point.y += point.vy;
+      if (point.x < 0 || point.x > width) point.vx *= -1;
+      if (point.y < 0 || point.y > height) point.vy *= -1;
 
-        if (dist < 120) {
-          const alpha = (1 - dist / 120) * 0.18;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(0, 240, 255, ${alpha})`;
-          ctx.lineWidth = 0.75;
-          ctx.stroke();
+      context.beginPath();
+      context.arc(point.x, point.y, 1, 0, Math.PI * 2);
+      context.fillStyle = 'rgba(84, 230, 223, .42)';
+      context.fill();
+
+      for (let otherIndex = index + 1; otherIndex < points.length; otherIndex += 1) {
+        const other = points[otherIndex];
+        const distance = Math.hypot(point.x - other.x, point.y - other.y);
+        if (distance < 115) {
+          context.beginPath();
+          context.moveTo(point.x, point.y);
+          context.lineTo(other.x, other.y);
+          context.strokeStyle = `rgba(84, 230, 223, ${(1 - distance / 115) * 0.11})`;
+          context.stroke();
         }
       }
-    }
-
-    particles.forEach(p => {
-      p.update();
-      p.draw();
     });
-
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-}
-
-/* ==========================================================================
-   2. TERMINAL DIAGNOSTIC SIMULATION
-   ========================================================================== */
-function initTerminalSimulation() {
-  const terminalText = document.getElementById('terminal-stream');
-  if (!terminalText) return;
-
-  const logs = [
-    'SCANNING LOCAL BUSINESS VECTORS: KL & SELANGOR...',
-    'ANALYZING GOOGLE MAPS DIRECTORY: 94 REVIEWS IDENTIFIED',
-    'DETECTED PROSPECT: MAYMORII STUDIO (CHERAS)',
-    'DEPLOYING 24H INTERACTIVE PROTOTYPE → /demo/maymorii',
-    'STATUS: HIGH-CONVERSION ENGINE ARMED & READY.'
-  ];
-
-  let logIndex = 0;
-  let charIndex = 0;
-  let currentLog = '';
-
-  function typeLog() {
-    if (logIndex >= logs.length) return;
-
-    if (charIndex < logs[logIndex].length) {
-      currentLog += logs[logIndex].charAt(charIndex);
-      terminalText.textContent = currentLog;
-      charIndex++;
-      setTimeout(typeLog, 30);
-    } else {
-      setTimeout(() => {
-        logIndex++;
-        charIndex = 0;
-        currentLog = '';
-        if (logIndex < logs.length) typeLog();
-      }, 2500);
-    }
-  }
-
-  setTimeout(typeLog, 800);
-}
-
-/* ==========================================================================
-   3. INTERACTIVE PROJECT ESTIMATOR & WHATSAPP BUILDER
-   ========================================================================== */
-function initEstimator() {
-  const industrySelect = document.getElementById('est-industry');
-  const tierSelect = document.getElementById('est-tier');
-  const featureCheckboxes = document.querySelectorAll('.est-feature');
-  const priceDisplay = document.getElementById('est-price-display');
-  const timeDisplay = document.getElementById('est-timeline-display');
-  const triggerBtn = document.getElementById('est-whatsapp-btn');
-
-  if (!industrySelect || !tierSelect || !priceDisplay || !triggerBtn) return;
-
-  const tierBasePrices = {
-    'starter': 1199,
-    'conversion': 1899,
-    'scale': 2899
+    frameId = window.requestAnimationFrame(draw);
   };
 
-  const tierTimelines = {
-    'starter': '3–5 Business Days',
-    'conversion': '5–7 Business Days',
-    'scale': '7–12 Business Days'
-  };
-
-  function calculateEstimate() {
-    const tier = tierSelect.value || 'conversion';
-    let basePrice = tierBasePrices[tier] || 1899;
-    let timeline = tierTimelines[tier] || '5–7 Business Days';
-
-    // Calculate add-on features
-    let selectedFeatures = [];
-    featureCheckboxes.forEach(cb => {
-      if (cb.checked) {
-        basePrice += parseInt(cb.getAttribute('data-price') || '0', 10);
-        selectedFeatures.push(cb.getAttribute('data-name'));
-      }
-    });
-
-    // Update screen
-    priceDisplay.textContent = `RM ${basePrice.toLocaleString()}`;
-    if (timeDisplay) timeDisplay.textContent = timeline;
-
-    return {
-      industry: industrySelect.options[industrySelect.selectedIndex].text,
-      tier: tierSelect.options[tierSelect.selectedIndex].text,
-      price: basePrice,
-      timeline: timeline,
-      features: selectedFeatures
-    };
-  }
-
-  // Event listeners
-  industrySelect.addEventListener('change', calculateEstimate);
-  tierSelect.addEventListener('change', calculateEstimate);
-  featureCheckboxes.forEach(cb => cb.addEventListener('change', calculateEstimate));
-
-  // WhatsApp click handler
-  triggerBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    const data = calculateEstimate();
-
-    let message = `Hello Afiq / NEXURA LABS! 🚀\n\nI'm exploring a high-conversion website for my business:\n` +
-      `• Industry: ${data.industry}\n` +
-      `• Architecture Tier: ${data.tier}\n` +
-      `• Estimated Investment: RM ${data.price.toLocaleString()}\n` +
-      `• Target Delivery: ${data.timeline}\n`;
-
-    if (data.features.length > 0) {
-      message += `• Included Modules: ${data.features.join(', ')}\n`;
-    }
-
-    message += `\nI would like to request a 24-Hour Custom Prototype Concept for my business. Let's discuss!`;
-
-    const whatsappUrl = `https://wa.me/601116840840?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+  resize();
+  draw();
+  window.addEventListener('resize', resize, { passive: true });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) window.cancelAnimationFrame(frameId);
+    else draw();
   });
-
-  // Initial calculation
-  calculateEstimate();
 }

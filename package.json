@@ -1,19 +1,18 @@
 {
   "name": "nexura-labs",
-  "version": "1.0.0",
-  "description": "NEXURA LABS — Futuristic Digital Agency & Client Demo Platform",
-  "main": "index.html",
+  "version": "1.1.0",
+  "private": true,
+  "description": "NEXURA LABS — conversion-focused websites and client demo platform",
   "scripts": {
     "dev": "npx -y serve .",
     "start": "npx -y serve -l 8088 .",
-    "serve": "python -m http.server 8088"
+    "serve": "python -m http.server 8088",
+    "check:js": "node --check assets/js/agency.js && node --check demo/maymorii/js/main.js"
   },
   "keywords": [
     "nexura-labs",
-    "digital-agency",
-    "web-development",
-    "high-conversion",
-    "futuristic",
+    "web-design-malaysia",
+    "conversion-focused",
     "client-demos"
   ],
   "author": "Afiq Amri — NEXURA LABS",
