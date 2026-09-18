@@ -26,13 +26,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Verify source
+        run: npm run check
+
+      - name: Prepare public site artifact
+        shell: bash
+        run: |
+          mkdir -p _site/apps _site/demo/maymorii
+          cp index.html robots.txt sitemap.xml .nojekyll _site/
+          cp -R apps/nexura-website _site/apps/
+          cp -R apps/maymori-demo _site/apps/
+          cp demo/maymorii/index.html _site/demo/maymorii/
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '_site'
 
       - name: Deploy to GitHub Pages
         id: deployment

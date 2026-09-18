@@ -6,25 +6,26 @@ Conversion-focused websites for Malaysian local businesses, supported by a reusa
 
 ```text
 NEXURA_LABS/
-|-- index.html                         # Main Nexura Labs website
-|-- assets/
-|   |-- css/futuristic.css            # Design system and responsive styles
-|   |-- js/agency.js                  # Navigation, reveals, form and motion
-|   `-- favicon.svg                   # Nexura Labs browser icon
-|-- demo/
-|   |-- _template/
-|   |   `-- business-data.example.json # Reusable client-demo data model
-|   `-- maymorii/                     # Independent Maymorii concept
+|-- apps/
+|   |-- nexura-website/               # Main Nexura Labs website
+|   `-- maymori-demo/                 # Independent client concept
+|-- packages/
+|   `-- shared-components/            # Reusable, client-neutral resources
+|-- docs/
+|   `-- clients/maymori/              # Client-specific working documentation
 |-- operations/
 |   |-- lead-tracker-template.csv     # Lightweight sales pipeline
 |   `-- outreach-scripts.md           # Honest outreach and follow-ups
+|-- AGENTS.md                         # Shared workspace instructions
+|-- index.html                        # Root compatibility redirect
+|-- demo/maymorii/index.html          # Legacy demo-route redirect
 |-- robots.txt
 |-- sitemap.xml
 |-- .github/workflows/deploy.yml      # GitHub Pages deployment
 `-- package.json
 ```
 
-The main agency site and every demo keep separate styles and scripts. This avoids accidental design conflicts and allows each concept to move into its own production repository later.
+The main agency site and client demo keep separate styles, scripts, content, and assets. Shared resources must remain client-neutral. The root redirect files preserve previously published links while source ownership stays under `apps/`.
 
 ## Current offer
 
@@ -39,11 +40,13 @@ Normal payment terms are 50% before production and 50% before launch. Complex pr
 ## Run locally
 
 ```bash
-python -m http.server 8088
+npm run serve
 ```
 
-- Agency: `http://localhost:8088/`
-- Maymorii concept: `http://localhost:8088/demo/maymorii/`
+- Root redirect: `http://localhost:8088/`
+- Agency: `http://localhost:8088/apps/nexura-website/`
+- Maymori concept: `http://localhost:8088/apps/maymori-demo/`
+- Legacy Maymorii route: `http://localhost:8088/demo/maymorii/`
 
 Check JavaScript syntax with:
 
@@ -53,9 +56,9 @@ npm run check:js
 
 ## Deployment
 
-The workflow in `.github/workflows/deploy.yml` publishes this static project to GitHub Pages whenever `main` is updated. No build step is required.
+The workflow in `.github/workflows/deploy.yml` checks the source and assembles a public-only artifact whenever `main` is updated. It publishes the two apps, redirect routes, and required SEO files without exposing internal docs, operations files, or repository instructions. The root redirect keeps the existing repository URL usable without duplicating app source files.
 
-When the repository or domain changes, update the canonical URL in `index.html`, plus the URLs in `robots.txt` and `sitemap.xml`.
+When the repository or domain changes, update the canonical URL in `apps/nexura-website/index.html`, plus the URLs in `robots.txt` and `sitemap.xml`.
 
 ## Important launch checklist
 

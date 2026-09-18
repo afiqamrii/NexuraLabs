@@ -7,7 +7,8 @@
     "dev": "npx -y serve .",
     "start": "npx -y serve -l 8088 .",
     "serve": "python -m http.server 8088",
-    "check:js": "node --check assets/js/agency.js && node --check demo/maymorii/js/main.js"
+    "check": "npm run check:js",
+    "check:js": "node --check apps/nexura-website/assets/js/agency.js && node --check apps/maymori-demo/js/main.js"
   },
   "keywords": [
     "nexura-labs",

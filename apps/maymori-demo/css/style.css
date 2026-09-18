@@ -41,6 +41,10 @@ img { display: block; width: 100%; max-width: 100%; }
 .notice-inner p { margin: 0; flex: 1; }
 .notice-label { padding: 3px 7px; border: 1px solid var(--line-light); color: var(--white); font-size: 8px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 .notice-inner a { color: var(--clay-light); text-decoration: none; font-weight: 700; white-space: nowrap; }
+.concept-switcher { flex: 0 0 auto; padding: 2px; display: flex; gap: 2px; border: 1px solid rgba(255,255,255,.24); border-radius: 999px; }
+.notice-inner .concept-switcher a, .concept-switcher span { min-height: 24px; padding: 0 10px; display: inline-flex; align-items: center; border-radius: 999px; color: rgba(255,255,255,.68); font-size: 7px; font-weight: 700; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; white-space: nowrap; }
+.concept-switcher span[aria-current="page"] { background: var(--cream); color: var(--ink); }
+.notice-inner .concept-switcher a:hover { background: rgba(255,255,255,.1); color: var(--white); }
 
 .site-header { position: sticky; z-index: 100; top: 0; height: 82px; border-bottom: 1px solid var(--line); background: rgba(244,239,231,.93); backdrop-filter: blur(18px); transition: height .3s, box-shadow .3s; }
 .site-header.is-scrolled { height: 68px; box-shadow: 0 10px 32px rgba(55,44,33,.08); }
@@ -302,7 +306,9 @@ img { display: block; width: 100%; max-width: 100%; }
   .demo-notice { min-height: 44px; }
   .notice-inner { min-height: 44px; gap: 10px; }
   .notice-inner p { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .notice-inner a { display: none; }
+  .notice-inner > .nexura-link { display: none; }
+  .notice-label { display: none; }
+  .notice-inner p { max-width: 42vw; }
   .site-header, .site-header.is-scrolled { height: 66px; }
   .header-inner { grid-template-columns: 1fr auto; }
   .brand-mark { width: 34px; height: 34px; }
